@@ -75,7 +75,7 @@ while [ $progress -le $(($cols)) ]; do
     echo -ne '\033[m\033[1C' # ───┘ Move one right.
 
     echo -ne "\033[${progress}C" # ──────┐ Move cursor right progress distance.
-    echo -ne "▋\r" #                     │ Print bar.
+    echo -ne "█\r" #                     │ Print bar.
     echo -ne '\033[1C' # ────────────────┘ Move one right.
 
     progress=$[ $progress + 1 ] # ──────── Progress ++
