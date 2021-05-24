@@ -59,26 +59,26 @@ while [ $progress -le $(($cols)) ]; do
     
     percentage=$(($(($progress * 100)) / $cols))
     #                          │       │       
-    #                          └── Calculate percentage.
+    #                          └ Calculate percentage.
     
     len=$(($(($cols - ${#percentage})) / 2))
-    #               │
-    #               └──────────────────┴─ Calculate length 
-    #                                     of percetange text.
+    #               │                  │
+    #               └ Calculate length ┘
+    #                 of percetange text.
 
-    if (($percentage >= 48)); then # ──┐
-        echo -ne "\033[7m" #           │ Invert text if percentage > 48
-    fi # ──────────────────────────────┘ 
+    if (($percentage >= 48)); then #┐
+        echo -ne "\033[7m" #        │ Invert text if percentage > 48
+    fi # ───────────────────────────┘ 
 
-    echo -ne "\033[${len}C" # ──────────┐ Move cursor right len distance.
-    echo -ne "${percentage}% \r" #    │ Print percentage.
-    echo -ne '\033[m\033[1C' # ───┘ Move one right.
+    echo -ne "\033[${len}C" # ──────┐ Move cursor right len distance.
+    echo -ne "${percentage}% \r" #  │ Print percentage.
+    echo -ne '\033[m\033[1C' # ─────┘ Move one right.
 
-    echo -ne "\033[${progress}C" # ──────┐ Move cursor right progress distance.
-    echo -ne "█\r" #                     │ Print bar.
-    echo -ne '\033[1C' # ────────────────┘ Move one right.
+    echo -ne "\033[${progress}C" # ─┐ Move cursor right progress distance.
+    echo -ne "█\r" #                │ Print bar.
+    echo -ne '\033[1C' # ───────────┘ Move one right.
 
-    progress=$[ $progress + 1 ] # ──────── Progress ++
+    progress=$[ $progress + 1 ] # ─── Progress ++
 done
 
 echo ""
