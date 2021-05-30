@@ -67,13 +67,13 @@ while [ $progress -le $(($cols)) ]; do
     #               └ Calculate length ┘
     #                 of percetange text.
 
-    if (($percentage >= 48)); then #──┐
+    if (($percentage >= 48)); then # ┐
         echo -ne "\033[97m\033[46m" #│ Invert text if percentage > 48
-    fi # ─────────────────────────────┘ 
+    fi # ────────────────────────────┘ 
 
-    echo -ne "\033[${len}C" # ────────────┐ Move cursor right len distance.
-    echo -ne "${percentage}% \r" #│ Print percentage.
-    echo -ne '\033[m\033[1C' # ───────────┘ Move one right.
+    echo -ne "\033[${len}C" # ───┐ Move cursor right len distance.
+    echo -ne "${percentage}% \r"#│ Print percentage.
+    echo -ne '\033[m\033[1C' # ──┘ Move one right.
 
     echo -ne "\033[${progress}C" # ─┐ Move cursor right progress distance.
     echo -ne "\033[36m█\r" #        │ Print bar.
