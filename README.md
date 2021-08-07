@@ -12,8 +12,6 @@ Currently implemented languages:
 - Python
 
 
-Usage:
-
-	./default
+		./default
 	 
-	To print a loading bar in the default color of your terminal.
+		To print a loading bar in the default color of your terminal.
