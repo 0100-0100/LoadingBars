@@ -2,6 +2,8 @@
 
 ### This is my own implementation of a more visually appealing loading bar for use in CLI applications and programs.
 
+![gif animation of bars loading](Loadingbars.gif)
+
 As a practice for me, I'm implementing the same loading bars in the basic 8 colors with
 the use of ANSI escape sequences in as many languages as I can, due to the ANSI escapes
 this code would not run as intended on PowerShell or CMD in a WindowsOS, but it will run
@@ -16,9 +18,9 @@ Inside the folder for the given language you can find the simplest implementatio
 version file.
 
 		./default.sh
-        ./default.py
+		./default.py
 	 
-		To print a sample loading bar using the default color of your terminal.
+		# To print a sample loading bar using the default color of your terminal.
 
 This is intended to be used as a guide or template on how to implement a loading bar with your
 application running on a console.
