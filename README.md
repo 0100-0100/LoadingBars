@@ -2,7 +2,7 @@
 
 ### This is my own implementation of a more visually appealing loading bar for use in CLI applications and programs.
 
-![gif animation of bars loading](Loadingbars.gif)
+![gif animation of bars loading](LoadingBars.gif)
 
 As a practice for me, I'm implementing the same loading bars in the basic 8 colors with
 the use of ANSI escape sequences in as many languages as I can, due to the ANSI escapes
