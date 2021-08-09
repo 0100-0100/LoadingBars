@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 # 
-# Default Custom Load bar.
+# Red Custom Load bar.
 # 
-# Written By Diego Lopez May 24 2021
-#
-# Its default because it uses your current terminal's color.
+# Updated By Diego Lopez Aug 8 2021
 
 # Star Drawing box. - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
 
@@ -12,19 +10,19 @@ cols=$(tput cols) # ───────────── Get the width of the
 cols=$(($cols - 3)) # ─────────── Substract 3 to prevent overflow.
 
 echo -ne "\033[31m"
-echo -n '┌' # ──────────────────┐ Print upper part of load bar box.
-printf '─%.0s' $(seq 0 $cols) # ┤ String multiplication in bash.
-echo '┐' # ─────────────────────┘
+echo -n "┌" # ──────────────────┐ Print upper part of load bar box.
+printf "─%.0s" $(seq 0 $cols) # ┤ String multiplication in bash.
+echo "┐" # ─────────────────────┘
 
-echo -n '│' # ──────────────────┐ 
-printf ' %.0s' $(seq 0 $cols) # │ Print middle part uf load bar box.
-echo '│' # ─────────────────────┘
+echo -n "│" # ──────────────────┐ 
+printf " %.0s" $(seq 0 $cols) # │ Print middle part uf load bar box.
+echo "│" # ─────────────────────┘
 
-echo -n '└' # ──────────────────┐ 
-printf '─%.0s' $(seq 0 $cols) # │ Print bottom part uf load bar box.
-echo -ne '┘\r' # ───────────────┘
+echo -n "└" # ──────────────────┐ 
+printf "─%.0s" $(seq 0 $cols) # │ Print bottom part uf load bar box.
+echo -ne "┘\r" # ───────────────┘
 
-echo -ne '\033[1A\033[2C' # ───── Set cursor to begining of loading bar.
+echo -ne "\033[1A\033[2C" # ───── Set cursor to begining of loading bar.
 
 cols=$(($cols - 1)) # ─────────── Substract one to account for padding.
 
@@ -32,26 +30,22 @@ cols=$(($cols - 1)) # ─────────── Substract one to account
 
 progress=0 # ──────────────────── Start progress variable.
 
-text='Red Bar' # ────────── Inner text.
-
-half=$(($(($cols - 1)) / 2))
-#                │     │
-#                └─────┴───────── Calculate half point.
+text="Red Bar" # ────────── Inner text.
 
 len=$(($(($cols - ${#text})) / 2))
 #               │            │
 #               └────────────┴─── Calculate length of text.
 
-echo -ne "\033[${len}C" # ─────── Move cursor to 'mid' point taking
-#                                        length into account.
+echo -ne "\033[${len}C" # ─────── Move cursor to "mid" point taking
+#                                 length into account.
 
 echo -ne "$text\r" # ───────────┐ Print text.
-echo -ne '\033[2C' #            │ Move to beggining of bar.
+echo -ne "\033[2C" #            │ Move to beggining of bar.
 sleep 2 # ──────────────────────┘ Wait 2 seconds.
 
-printf ' %.0s' $(seq 0 $cols) # ┐
-echo -ne '\r' #                 │ Clean text.
-echo -ne '\033[2C' # ───────────┘
+printf " %.0s" $(seq 0 $cols) # ┐
+echo -ne "\r" #                 │ Clean text.
+echo -ne "\033[2C" # ───────────┘
 
 # Start main loading loop - - - - - - - - - - - - - - - - - - - - - - - - - - |
 while [ $progress -le $(($cols)) ]; do
@@ -67,19 +61,21 @@ while [ $progress -le $(($cols)) ]; do
     #               └ Calculate length ┘
     #                 of percetange text.
 
-    if (($percentage >= 48)); then #──┐
-        echo -ne "\033[97m\033[41m" #│ Invert text if percentage > 48
+	echo -ne "\033[31m"
+
+    if (($percentage >= 48)); then # ─┐
+        echo -ne "\033[97m\033[41m"  #│ Invert text if percentage > 48
     fi # ─────────────────────────────┘ 
 
-    echo -ne "\033[${len}C" # ────────────┐ Move cursor right len distance.
-    echo -ne "${percentage}% \r" #│ Print percentage.
-    echo -ne '\033[m\033[1C' # ───────────┘ Move one right.
+    echo -ne "\033[${len}C" # ────────┐ Move cursor right len distance.
+    echo -ne "${percentage}% \r"     #│ Print percentage.
+    echo -ne "\033[m\033[1C" # ───────┘ Move one right.
 
-    echo -ne "\033[${progress}C" # ─┐ Move cursor right progress distance.
-    echo -ne "\033[31m█\r" #        │ Print bar.
-    echo -ne '\033[1C' # ───────────┘ Move one right.
+    echo -ne "\033[${progress}C" # ───┐ Move cursor right progress distance.
+    echo -ne "\033[41m \r" #          │ Print bar.
+    echo -ne "\033[1C\033[m" # ───────┘ Move one right.
 
-    progress=$[ $progress + 1 ] # ─── Progress ++
+    progress=$[ $progress + 1 ] # ───── Progress ++
 done
 
 echo ""

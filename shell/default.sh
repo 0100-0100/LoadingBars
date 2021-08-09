@@ -4,26 +4,27 @@
 # 
 # Written By Diego Lopez May 24 2021
 #
-# Its default because it uses your current terminal's color.
+# Its default because it uses your current terminal"s color.
 
 # Star Drawing box. - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
 
 cols=$(tput cols) # ───────────── Get the width of the terminal.
 cols=$(($cols - 3)) # ─────────── Substract 3 to prevent overflow.
 
-echo -n '┌' # ──────────────────┐ Print upper part of load bar box.
-printf '─%.0s' $(seq 0 $cols) # ┤ String multiplication in bash.
-echo '┐' # ─────────────────────┘
+echo -ne "\033[m"
+echo -n "┌" # ──────────────────┐ Print upper part of load bar box.
+printf "─%.0s" $(seq 0 $cols) # ┤ String multiplication in bash.
+echo "┐" # ─────────────────────┘
 
-echo -n '│' # ──────────────────┐ 
-printf ' %.0s' $(seq 0 $cols) # │ Print middle part uf load bar box.
-echo '│' # ─────────────────────┘
+echo -n "│" # ──────────────────┐ 
+printf " %.0s" $(seq 0 $cols) # │ Print middle part uf load bar box.
+echo "│" # ─────────────────────┘
 
-echo -n '└' # ──────────────────┐ 
-printf '─%.0s' $(seq 0 $cols) # │ Print bottom part uf load bar box.
-echo -ne '┘\r' # ───────────────┘
+echo -n "└" # ──────────────────┐ 
+printf "─%.0s" $(seq 0 $cols) # │ Print bottom part uf load bar box.
+echo -ne "┘\r" # ───────────────┘
 
-echo -ne '\033[1A\033[2C' # ───── Set cursor to begining of loading bar.
+echo -ne "\033[1A\033[2C" # ───── Set cursor to begining of loading bar.
 
 cols=$(($cols - 1)) # ─────────── Substract one to account for padding.
 
@@ -31,7 +32,7 @@ cols=$(($cols - 1)) # ─────────── Substract one to account
 
 progress=0 # ──────────────────── Start progress variable.
 
-text='Default Bar' # ──────────── Inner text.
+text="Default Bar" # ──────────── Inner text.
 
 half=$(($(($cols - 1)) / 2))
 #                │     │
@@ -41,16 +42,16 @@ len=$(($(($cols - ${#text})) / 2))
 #               │            │
 #               └────────────┴─── Calculate length of text.
 
-echo -ne "\033[${len}C" # ─────── Move cursor to 'mid' point taking
+echo -ne "\033[${len}C" # ─────── Move cursor to "mid" point taking
 #                                        length into account.
 
 echo -ne "$text\r" # ───────────┐ Print text.
-echo -ne '\033[2C' #            │ Move to beggining of bar.
+echo -ne "\033[2C" #            │ Move to beggining of bar.
 sleep 2 # ──────────────────────┘ Wait 2 seconds.
 
-printf ' %.0s' $(seq 0 $cols) # ┐
-echo -ne '\r' #                 │ Clean text.
-echo -ne '\033[2C' # ───────────┘
+printf " %.0s" $(seq 0 $cols) # ┐
+echo -ne "\r" #                 │ Clean text.
+echo -ne "\033[2C" # ───────────┘
 
 # Start main loading loop - - - - - - - - - - - - - - - - - - - - - - - - - - |
 while [ $progress -le $(($cols)) ]; do
@@ -72,11 +73,11 @@ while [ $progress -le $(($cols)) ]; do
 
     echo -ne "\033[${len}C" # ──────┐ Move cursor right len distance.
     echo -ne "${percentage}% \r" #  │ Print percentage.
-    echo -ne '\033[m\033[1C' # ─────┘ Move one right.
+    echo -ne "\033[m\033[1C" # ─────┘ Move one right.
 
     echo -ne "\033[${progress}C" # ─┐ Move cursor right progress distance.
-    echo -ne "█\r" #                │ Print bar.
-    echo -ne '\033[1C' # ───────────┘ Move one right.
+    echo -ne "\033[7m \r" #         │ Print bar.
+    echo -ne "\033[1C\033[m" # ───────────┘ Move one right.
 
     progress=$[ $progress + 1 ] # ─── Progress ++
 done

@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # 
-# Magenta Custom Load bar.
+# Light Gray Custom Load bar.
 # 
-# Updated By Diego Lopez Aug 8 2021
+# Updated by Diego Lopez Aug 8 2021
 
 # Star Drawing box. - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
 
 cols=$(tput cols) # ───────────── Get the width of the terminal.
 cols=$(($cols - 3)) # ─────────── Substract 3 to prevent overflow.
 
-echo -ne "\033[35m"
+echo -ne "\033[37m"
 echo -n "┌" # ──────────────────┐ Print upper part of load bar box.
 printf "─%.0s" $(seq 0 $cols) # ┤ String multiplication in bash.
 echo "┐" # ─────────────────────┘
@@ -30,7 +30,7 @@ cols=$(($cols - 1)) # ─────────── Substract one to account
 
 progress=0 # ──────────────────── Start progress variable.
 
-text="Magenta Bar" # ────────── Inner text.
+text="Light Gray Bar" # ────────── Inner text.
 
 len=$(($(($cols - ${#text})) / 2))
 #               │            │
@@ -61,18 +61,18 @@ while [ $progress -le $(($cols)) ]; do
     #               └ Calculate length ┘
     #                 of percetange text.
 
-	echo -ne "\033[35m"
+	echo -ne "\033[37m"
 
     if (($percentage >= 48)); then # ─┐
-        echo -ne "\033[97m\033[45m"  #│ Invert text if percentage > 48
+        echo -ne "\033[30m\033[47m"  #│ Invert text if percentage > 48
     fi # ─────────────────────────────┘ 
 
     echo -ne "\033[${len}C" # ────────┐ Move cursor right len distance.
-    echo -ne "${percentage}% \r"     #│ Print percentage.
+	echo -ne "${percentage}% \r"     #│ Print percentage.
     echo -ne "\033[m\033[1C" # ───────┘ Move one right.
 
     echo -ne "\033[${progress}C" # ───┐ Move cursor right progress distance.
-    echo -ne "\033[45m \r" #          │ Print bar.
+    echo -ne "\033[47m \r" #          │ Print bar.
     echo -ne "\033[1C\033[m" # ───────┘ Move one right.
 
     progress=$[ $progress + 1 ] # ───── Progress ++
