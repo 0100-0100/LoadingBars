@@ -11,7 +11,7 @@ from time import sleep
 
 size = tty()  # ─ Get the size of the terminal.
 
-cols = size.columns - 2  # ─ Substract 3 to prevent overflow.
+cols = size.columns - 2  # ─ Substract 2 to prevent overflow.
 
 print('┌' + '─' * cols + '┐')
 print('│' + ' ' * cols + '│')
@@ -32,8 +32,8 @@ print(' ' * cols, end='\r')
 print('\033[2C', end='')
 
 progress = 0
-while progress <= cols:
 
+while progress <= cols:
     sleep(0.004)
     percentage = (progress * 100) // cols
     pos = (cols - len(str(percentage))) // 2
@@ -44,7 +44,6 @@ while progress <= cols:
     print("\033[{}C".format(pos), end='')
     print("{}%  ".format(percentage), end="\r")
     print('\033[m\033[1C', end='')
-
     print("\033[{}C".format(progress), end='')
     print("\033[7m \033[m", end='\r')
     print('\033[1C', end='')

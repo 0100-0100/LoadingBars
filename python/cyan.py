@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 '''
-Red Custom Load bar.
+Cyan Custom Load bar.
 
 Last Updated By Diego Lopez Aug 8 2021
 '''
@@ -10,7 +10,7 @@ from time import sleep
 size = tty()  # ─ Get the size of the terminal.
 
 cols = size.columns - 2  # ─ Substract 2 to prevent overflow.
-print('\033[31m', end='')
+print('\033[36m', end='')
 print('┌' + '─' * cols + '┐')
 print('│' + ' ' * cols + '│')
 print('└' + '─' * cols + '┘', end='\r')
@@ -18,7 +18,7 @@ print('\033[1A\033[2C', end='')
 
 cols = cols - 2
 
-text = 'Red Bar'
+text = 'Cyan Bar'
 pos = (cols - len(text)) // 2
 
 print('\033[{}C'.format(pos), end='')
@@ -36,15 +36,15 @@ while progress <= cols:
     percentage = (progress * 100) // cols
     pos = (cols - len(str(percentage))) // 2
 
-    print('\033[31m', end='')
+    print('\033[36m', end='')
     if percentage >= 48:
-        print('\033[97m\033[41m', end='')
+        print('\033[97m\033[46m', end='')
 
     print('\033[{}C'.format(pos), end='')
     print('{}%  '.format(percentage), end='\r\033[1C')
 
     print('\033[{}C'.format(progress), end='')
-    print('\033[41m \033[m', end='\r\033[1C')
+    print('\033[46m \033[m', end='\r\033[1C')
 
     progress += 1
 

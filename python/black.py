@@ -1,18 +1,16 @@
 #!/usr/bin/python3
-"""
-Default Custom Load bar.
+'''
+Black Custom Load bar.
 
-Written By Diego Lopez May 29 2021
-
-Its default because it uses your current terminal's color.
-"""
+Last Updated By Diego Lopez Aug 8 2021
+'''
 from os import get_terminal_size as tty
 from time import sleep
 
 size = tty()  # ─ Get the size of the terminal.
 
 cols = size.columns - 2  # ─ Substract 2 to prevent overflow.
-print('\033[30m')
+print('\033[30m', end='')
 print('┌' + '─' * cols + '┐')
 print('│' + ' ' * cols + '│')
 print('└' + '─' * cols + '┘', end='\r')
@@ -22,8 +20,9 @@ cols = cols - 2
 
 text = 'Black Bar'
 pos = (cols - len(text)) // 2
+
 print('\033[{}C'.format(pos), end='')
-print('\033[39m' + text, end='\r')
+print(text, end='\r')
 print('\033[2C', end='')
 sleep(2)
 
@@ -37,16 +36,15 @@ while progress <= cols:
     percentage = (progress * 100) // cols
     pos = (cols - len(str(percentage))) // 2
 
+    print('\033[30m', end='')
     if percentage >= 48:
-        print("\033[40m", end='')
+        print('\033[97m\033[40m', end='')
 
-    print("\033[{}C".format(pos), end='')
-    print("{}%  ".format(percentage), end="\r")
-    print('\033[m\033[1C', end='')
+    print('\033[{}C'.format(pos), end='')
+    print('{}%  '.format(percentage), end='\r\033[1C')
 
-    print("\033[{}C".format(progress), end='')
-    print("\033[40m \033[m", end='\r')
-    print('\033[1C', end='')
+    print('\033[{}C'.format(progress), end='')
+    print('\033[40m \033[m', end='\r\033[1C')
 
     progress += 1
 
