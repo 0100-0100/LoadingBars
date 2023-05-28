@@ -4,7 +4,7 @@
 # 
 # Written By Diego Lopez May 24 2021
 #
-# Its default because it uses your current terminal"s color.
+# Its default because it uses your current terminal's color.
 
 # Star Drawing box. - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
 
